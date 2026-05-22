@@ -1,0 +1,69 @@
+priority,event_name,trigger,platform,screen,required_properties,optional_properties,notes
+P0,baas_activate_cta_clicked,User taps any BukuSimpan activate CTA,iOS Android,Any screen with BaaS CTA,"user_id,source_touchpoint,platform,app_version,session_id",,source_touchpoint values: home_popup / bukulagen_home / cp_payment_banner / cp_payment_method / edc_fund_transfer / edc_cash_withdrawal / edc_bank_account / komisi_agen / komisi_nominal
+P1,baas_promo_banner_clicked,User taps BukuSimpan promo/marketing banner,iOS Android,Any screen with promo banner,"user_id,source_touchpoint,platform,app_version,session_id",,Previously: banner_marketing_bukusimpan
+P1,baas_overlay_viewed,BukuSimpan activation overlay appears,iOS Android,Overlay: Activation,"user_id,source_touchpoint,platform,app_version,session_id",,
+P2,baas_learn_more_clicked,User taps Pelajari Tentang BukuSimpan,iOS Android,Overlay,"user_id,platform,app_version,session_id",,Previously: button_clicked_pelajari_tentang_bukusimpan
+P2,baas_overlay_dismissed,User taps close on activation overlay,iOS Android,Overlay,"user_id,source_touchpoint,platform,app_version,session_id",,Previously: button_clicked_close
+P2,baas_home_popup_dismissed,User taps close on homepage popup,iOS Android,Popup: Homepage,"user_id,popup_state,platform,app_version,session_id",,popup_state: register / approved / setup
+P0,baas_register_started,User taps Aktifkan Sekarang on overlay,iOS Android,Overlay: BukuSimpan Aktivasi,"user_id,source_touchpoint,platform,app_version,session_id",,Top of registration funnel. Previously: button_clicked_aktifkan_sekarang
+P0,baas_kyc_verify_started,User taps Verifikasi Akun (new user requiring KYC),iOS Android,Overlay: BukuSimpan Verifikasi,"user_id,source_touchpoint,platform,app_version,session_id",,Previously: button_clicked_verifikasi_akun
+P1,baas_mobile_required_dismissed,EDC user sees mobile-only notice and backs out,Android,Page: Mobile Required Notice,"user_id,platform,app_version,session_id",,Measures device restriction impact. Previously: button_clicked_kembali (L2.2)
+P1,baas_temp_closed_dismissed,User sees temporary closed notice and backs out,iOS Android,Page: Temporary Closed,"user_id,platform,app_version,session_id",,Previously: button_clicked_kembali (L2.4)
+P1,baas_registration_form_viewed,Registration form screen appears,iOS Android,Form: Registration,"user_id,source_touchpoint,step_name,step_number,platform,app_version,session_id",,step_name=registration_form / step_number=1
+P2,baas_phone_change_clicked,User taps Ubah on phone number field,iOS Android,Form: Registration,"user_id,platform,app_version,session_id",,
+P1,baas_phone_change_confirmed,User confirms phone change (taps Ubah Nomor in popup),iOS Android,Popup: Change Phone,"user_id,platform,app_version,session_id",,
+P1,baas_phone_change_submitted,User submits new phone number,iOS Android,Page: Change Phone Number,"user_id,platform,app_version,session_id",,Pending BW approval. Previously: button_clicked_simpan
+P0,baas_kk_upload_started,User taps Upload Kartu Keluarga,iOS Android,Page: KK Upload Guide,"user_id,source_touchpoint,step_name,step_number,platform,app_version,session_id",,step_name=kk_upload / step_number=2. Previously: button_clicked_upload_kartu_keluarga
+P1,baas_kk_camera_selected,User selects camera in upload popup,iOS Android,Popup: Upload Document,"user_id,platform,app_version,session_id",,Previously: button_clicked_ambil_foto_dari_kamera
+P1,baas_kk_file_selected,User selects file in upload popup,iOS Android,Popup: Upload Document,"user_id,platform,app_version,session_id",,Previously: button_clicked_pilih_dari_file
+P0,baas_kk_photo_captured,User takes KK photo via camera,iOS Android,Camera,"user_id,platform,app_version,session_id",attempt_number,Previously: take_photo
+P1,baas_kk_photo_retaken,User taps Foto Ulang on KK confirmation,iOS Android,Page: KK Photo Confirmation,"user_id,attempt_number,platform,app_version,session_id",,Previously: button_clicked_foto_ulang
+P0,baas_kk_photo_confirmed,User taps Lanjut on KK photo confirmation,iOS Android,Page: KK Photo Confirmation,"user_id,platform,app_version,session_id",,Previously: button_clicked_lanjut (L2.11)
+P0,baas_kk_upload_failed,KK photo upload fails (format or server error),iOS Android,Camera or KK Confirmation,"user_id,error_code,error_message,platform,app_version,session_id",attempt_number,Added from ERS review — missing failure event
+P1,baas_family_card_form_viewed,Family card information form appears,iOS Android,Form: Family Card Info,"user_id,step_name,step_number,platform,app_version,session_id",,step_name=family_card / step_number=3. Previously: family_card_info
+P0,baas_family_card_form_submitted,User taps Lanjut submitting family card form,iOS Android,Form: Family Card Info,"user_id,step_name,step_number,platform,app_version,session_id",,Previously: button_clicked_lanjut (L2.12)
+P2,baas_tnc_link_clicked,User taps T&C / Privacy Policy link,iOS Android,Popup: Data Confirmation,"user_id,platform,app_version,session_id",,Previously: sentence_url_clicked
+P0,baas_tnc_agreed,User taps Ya Lanjut agreeing to T&C,iOS Android,Popup: Data Confirmation or Page: T&C,"user_id,platform,app_version,session_id",,Previously: button_clicked_ya_lanjut. Fires at L2.13 or L2.14.
+P0,baas_registration_submitted,Registration received by bank — Finished Registration page loads,iOS Android,Page: Finished Registration,"user_id,platform,app_version,session_id",,Fire on page load of L2.15. Entry to KYC funnel.
+P1,baas_registration_acknowledged,User taps Mengerti on Finished Registration,iOS Android,Page: Finished Registration,"user_id,platform,app_version,session_id",,Previously: button_clicked_mengerti (L2.15)
+P0,baas_registration_failed,Registration submission fails (server error),Backend,—,"user_id,error_code,error_message",,Server-side. Added from ERS review.
+P2,baas_registration_form_abandoned,User backs out during registration,iOS Android,Any registration screen,"user_id,step_name,step_number,platform,app_version,session_id",,Fire from KK upload step onwards only.
+P0,baas_kyc_approved,KYC review passes — account approved by bank,Backend,—,"user_id,processing_duration_ms,session_id",sla_breach,"Server-side. SLA: p90 < 12h. sla_breach=true if > 43200000ms"
+P0,baas_kyc_rejected,KYC fails — soft rejection (can re-register),Backend,—,"user_id,rejection_reason,processing_duration_ms","error_code,sla_breach",Server-side. Soft reject — user can resubmit.
+P0,baas_kyc_hard_rejected,KYC fails — hard rejection (cannot re-register),Backend,—,"user_id,rejection_reason,processing_duration_ms",error_code,Server-side.
+P0,baas_kyc_rejected_acknowledged,User taps Mengerti on rejection page,iOS Android,Page: Rejection,"user_id,rejection_reason,platform,app_version,session_id",,Previously: button_clicked_mengerti (L2.19)
+P0,baas_reregister_started,Soft-rejected user taps Daftar Ulang,iOS Android,Page: Re-Register,"user_id,attempt_number,platform,app_version,session_id",,Previously: button_clicked_daftar_ulang (L2.20). attempt_number starts at 2.
+P0,baas_reregister_failed,Re-registration submission fails,Backend,—,"user_id,error_code,error_message,attempt_number",,Server-side. Added from ERS review.
+P0,baas_link_account_cta_clicked,Approved user taps Hubungkan Rekening or Hubungkan Sekarang,iOS Android,Entry point or Popup: Approved,"user_id,source_touchpoint,platform,app_version,session_id",,source_touchpoint: home_popup_approved / entry_point_approved / bukulagen_home
+P0,baas_link_account_started,User taps Hubungkan Akun on Registration Success page,iOS Android,Page: Pendaftaran Akun Berhasil,"user_id,platform,app_version,session_id",,Previously: button_clicked_hubungkan_akun
+P0,baas_webview_entered,User leaves BW app into Nobu webview,iOS Android,Transition: BW to Nobu,"user_id,webview_name,destination,platform,app_version,session_id",,webview_name=nobu_account_linking. BW cannot instrument inside webview.
+P0,baas_webview_returned,User returns from Nobu webview to BW,iOS Android,Transition: Nobu to BW,"user_id,webview_name,outcome,platform,app_version,session_id",,outcome: completed / abandoned / error. Only signal of webview result.
+P0,baas_account_linked,BukuSimpan account linked — backend confirmed,Backend,—,"user_id,processing_duration_ms,session_id",sla_breach,Server-side.
+P0,baas_link_account_failed,Account linking fails,Backend,—,"user_id,error_code,error_message,processing_duration_ms",,Server-side. Added from ERS review.
+P0,baas_setup_default_cta_clicked,User taps to set BukuSimpan as default account,iOS Android,Popup or Entry Point: Setup,"user_id,source_touchpoint,platform,app_version,session_id",,source_touchpoint: home_popup_setup / entry_point_setup / benefit_popup
+P0,baas_default_account_setup_succeeded,Auto-setup of BukuSimpan as default succeeds,Backend,—,"user_id,processing_duration_ms,session_id",sla_breach,Server-side. L2.24 success → L2.26.
+P0,baas_default_account_setup_failed,Auto-setup fails,Backend,—,"user_id,error_code,error_message,processing_duration_ms",,Server-side. L2.24 failure → L2.25.
+P1,baas_setup_error_retry_clicked,User taps Coba Ulang after default setup error,iOS Android,Popup: Error,"user_id,platform,app_version,session_id",,Previously: button_clicked_coba_ulang (L2.25)
+P0,baas_page_viewed,User opens the BukuSimpan main page,iOS Android,Page: BukuSimpan,"user_id,platform,app_version,session_id",,Top-level engagement signal.
+P1,baas_check_balance_clicked,User taps Cek Saldo or eye button,iOS Android,Page: BukuSimpan,"user_id,platform,app_version,session_id",,Previously: button_clicked_cek_saldo / button_clicked_eye
+P1,baas_transaction_history_clicked,User taps Riwayat Transaksi,iOS Android,Page: BukuSimpan,"user_id,platform,app_version,session_id",,Previously: button_clicked_riwayat_transaksi
+P1,baas_account_detail_clicked,User taps Detail Akun,iOS Android,Page: BukuSimpan,"user_id,platform,app_version,session_id",,Previously: button_clicked_detail_akun
+P2,baas_debit_card_clicked,User taps Kartu Debit,iOS Android,Page: BukuSimpan,"user_id,platform,app_version,session_id",,
+P2,baas_change_pin_clicked,User taps Ubah Pin,iOS Android,Page: BukuSimpan,"user_id,platform,app_version,session_id",,
+P2,baas_reset_pin_clicked,User taps Reset Pin,iOS Android,Page: BukuSimpan,"user_id,platform,app_version,session_id",,
+P1,baas_transfer_bank_clicked,User taps Transfer Bank — enters Payment Out flow,iOS Android,Page: BukuSimpan,"user_id,platform,app_version,session_id",,Previously: button_clicked_transfer_bank
+P1,baas_komisi_cairkan_clicked,User taps Cairkan Komisi Agen,iOS Android,Page: Komisi Agen,"user_id,platform,app_version,session_id",,TYPO FIXED — was button_clicken_cairkan_komisi_agen
+P1,baas_source_account_selected,User selects Tabungan or Giro as source account,iOS Android,Page: Choose Source Account Type,"user_id,account_type,platform,app_version,session_id",,account_type: tabungan / giro
+P1,baas_komisi_amount_submitted,User taps Lanjut submitting komisi amount,iOS Android,Page: Input Nominal Komisi,"user_id,amount,platform,app_version,session_id",,Previously: button_clicked_lanjut (L1.17)
+P0,baas_komisi_amount_failed,Komisi transfer submission fails,Backend,—,"user_id,error_code,error_message",amount,Server-side. Added from ERS review.
+P0,baas_payment_started,User enters the Payment Out flow,iOS Android,Page: Choose Bank Destination,"user_id,source_touchpoint,platform,app_version,session_id",,source_touchpoint: bukusimpan_page / tarik_tunai_button / bayar_button
+P1,baas_payment_bank_selected,User selects destination bank,iOS Android,Page: Choose Bank Destination,"user_id,bank_name,platform,app_version,session_id",,Previously: bank_list_clicked
+P1,baas_payment_account_number_entered,User inputs destination bank account number,iOS Android,Page: Bank Account Number Input,"user_id,bank_name,platform,app_version,session_id",,Previously: form_input (L4.2) — renamed to avoid generic name collision
+P1,baas_payment_amount_entered,User inputs payment amount,iOS Android,Page: Payment Amount Input,"user_id,amount,currency,platform,app_version,session_id",,Previously: amount_input
+P0,baas_payment_method_selected,User selects payment method from drawer,iOS Android,Popup: Payment Method Drawer,"user_id,payment_method,platform,app_version,session_id",,payment_method: buku_simpan / saldo_bw
+P0,baas_insufficient_balance_viewed,User sees insufficient balance notice,iOS Android,Popup: Topup Reminder,"user_id,amount,platform,app_version,session_id",,TYPO FIXED — was button_clickde_cek_saldo_bukusimpan
+P1,baas_payment_processing_viewed,User sees payment processing screen,iOS Android,Page: Pembayaran Sedang Diproses,"user_id,amount,payment_method,platform,app_version,session_id",,Previously: waiting_for_pending — RENAMED
+P0,baas_payment_confirmed,User submits PIN confirming payment intent,iOS Android,Page: Input PIN,"user_id,amount,payment_method,platform,app_version,session_id",bank_name,Fires before backend result — records user intent.
+P0,baas_payment_success,Payment completes successfully,Backend,Page: Success Payment,"user_id,amount,payment_method,processing_duration_ms,currency",sla_breach,"Server-side. SLA: p90 < 30s. sla_breach=true if > 30000ms"
+P0,baas_payment_failed,Payment fails,Backend,Page: Error,"user_id,error_code,error_message,payment_method,processing_duration_ms","amount,sla_breach",Server-side.
+P2,baas_payment_detail_clicked,User taps Lihat Detail Pembayaran,iOS Android,Page: Payment Processing,"user_id,platform,app_version,session_id",,Previously: button_clicked_lihat_detail_pembayaran
